@@ -1,5 +1,6 @@
 const sortableList =
     document.getElementById("sortable");
+
 let draggedItem = null;
 
 sortableList.addEventListener(
@@ -7,8 +8,7 @@ sortableList.addEventListener(
     (e) => {
         draggedItem = e.target;
         setTimeout(() => {
-            e.target.style.display =
-                "none";
+            e.target.style.display = "none";
         }, 0);
     });
 
@@ -25,17 +25,9 @@ sortableList.addEventListener(
     "dragover",
     (e) => {
         e.preventDefault();
-        const afterElement =
-            getDragAfterElement(
-                sortableList,
-                e.clientY);
-        const currentElement =
-            document.querySelector(
-                ".dragging");
+        const afterElement = getDragAfterElement(sortableList, e.clientY);
         if (afterElement == null) {
-            sortableList.appendChild(
-                draggedItem
-            );
+            sortableList.appendChild(draggedItem);
         }
         else {
             sortableList.insertBefore(
@@ -55,10 +47,8 @@ const getDragAfterElement = (
 
     return draggableElements.reduce(
         (closest, child) => {
-            const box =
-                child.getBoundingClientRect();
-            const offset =
-                y - box.top - box.height / 2;
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
             if (
                 offset < 0 &&
                 offset > closest.offset) {
